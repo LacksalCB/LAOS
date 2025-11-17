@@ -2,23 +2,18 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "include/vga.h"
+#include "include/tty.h"
+
+#define WIDTH 80
+#define HEIGHT 25
 
 void kernel_main(void) 
 {
-	volatile unsigned short* vga = (volatile unsigned short*) (0xB8000);
-	unsigned short blank = 0x0F00 | ' ';
-
-	// Clear screen
-	for (int i = 0; i < 80 * 25; i++) {
-		vga[i] = blank;
-	}
-	
-
-
-	vga[0] = 0x0F00 | 'H';
-	vga[1] = 0x0F00 | 'i';
+	// Clear screen from QEMU output and bootloader output
+	terminal_initialize();
+	terminal_writestring("Hello, world!");
+	terminal_putchar(10);
+	terminal_writestring("Oh, no!");
 	for(;;) {__asm__ __volatile__("hlt");}
 }
-
 

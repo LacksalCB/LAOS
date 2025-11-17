@@ -7,7 +7,7 @@ LOG_DIR = logs
 BUILD_DIR = build
 BIN_DIR = bin
 
-CFLAGS= -m32 -ffreestanding -std=c11 -O2 -g -Wall -Wextra -Wno-return-type -Wno-unused-function -nostdlib
+CFLAGS= -m32 -fno-builtin -fno-stack-protector -ffreestanding -std=c11 -O0 -g -Wall -Wextra -Wno-return-type -Wno-unused-function -nostdlib
 
 BOOTSECT_SOURCES= $(SRC_DIR)/bootloader/boot.asm
 
