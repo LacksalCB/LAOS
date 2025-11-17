@@ -144,7 +144,7 @@ gdt_end:
 	
 gdt_descriptor:
 	dw gdt_end - gdt_start - 1
-	dd 0x00007C00
+	dd gdt_start
 
 boot_drive: 
 	db 0
@@ -175,28 +175,12 @@ protected_entry:
 	mov byte [edi], 'X'
 	mov byte [edi+1], 0x0F
 
-	call print_32
-
-	; Print if this works	
+	; jmp to kernel location in memory	
 	jmp 0x10000
 
 	cli
 	hlt
 	jmp $
-
-print_32:
-	pushad
-	mov edi, 0x000B8000
-
-.next_char_32:
-	lodsb
-	test al, al
-	jz .done_32
-
-	mov [edi], al
-	mov byte [edi+1], 0x0F
-	add edi, 2
-	jmp .next_char_32
 
 .done_32:
 	popad

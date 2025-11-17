@@ -54,7 +54,7 @@ $(KERNEL): $(KERNEL_OBJECTS)
 $(IMG): $(BOOTSECT) $(KERNEL)
 	dd if=/dev/zero of=$(IMG) bs=512 count=2880
 	dd if=$(BOOTSECT) of=$(IMG) conv=notrunc seek=0 count=1
-	dd if=$(KERNEL) of=$(IMG) conv=notrunc seek=$$((0x10000)) bs=1 
+	dd if=$(KERNEL) of=$(IMG) conv=notrunc seek=1 
 	objdump -D -b binary -mi386 -Maddr16,data16 $(IMG) >> $(LOG_DIR)/img.txt
 
 run: 
