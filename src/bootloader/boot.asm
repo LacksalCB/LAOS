@@ -171,10 +171,6 @@ protected_entry:
 	mov ss, ax
 	mov esp, 0x0009FB00
 
-	mov edi, 0x000B8000
-	mov byte [edi], 'X'
-	mov byte [edi+1], 0x0F
-
 	; jmp to kernel location in memory	
 	jmp 0x10000
 
