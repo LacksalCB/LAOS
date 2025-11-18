@@ -11,7 +11,7 @@ void kernel_main(void)
 	// Clear screen from QEMU output and bootloader output
 	terminal_initialize();
 	terminal_writestring("Hello, world!\n");
-	terminal_writestring("Keyboard input will be a monster.");		
+	terminal_writestring("Keyboard input \' \" \\ will be a monster.");		
 
 	for(;;) {__asm__ __volatile__("hlt");}
 }

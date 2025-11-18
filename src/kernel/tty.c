@@ -59,12 +59,36 @@ void terminal_putescchar(char c) {
 	switch (c) {
 		case EC_ALERT:
 			break;
+		case EC_BACKSPACE:
+			break;
 		case EC_HTAB:
 			terminal_column += 4;
 			break;
 		case EC_NEWLINE:
 			terminal_column = 0;
 			terminal_row += 1;
+			break;
+		case EC_VTAB:
+			break;
+		case EC_PAGE_BREAK:
+			break;
+		case EC_CARRIAGE_RETURN:
+			break;
+		case EC_ESC_CHAR:
+			break;
+		case EC_DQUOTE:
+			terminal_column++;
+			terminal_putentryat(0x22, terminal_color, terminal_column-1, terminal_row);
+			break;
+		case EC_QUOTE:
+			terminal_column++;
+			terminal_putentryat(0x27, terminal_color, terminal_column-1, terminal_row);
+			break;
+		case EC_QMARK:
+			break;
+		case EC_BACKSLASH:
+			terminal_column++;
+			terminal_putentryat(0x5C, terminal_color, terminal_column-1, terminal_row);
 			break;
 	}	
 }
