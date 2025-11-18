@@ -1,0 +1,12 @@
+*.bin
+*.img
+
+*.sh
+
+build/
+logs/
+mnt/
+bin/
+kernel/*.o
+
+

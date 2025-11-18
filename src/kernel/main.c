@@ -4,16 +4,15 @@
 
 #include "include/tty.h"
 
-#define WIDTH 80
-#define HEIGHT 25
-
 void kernel_main(void) 
 {
+	// TODO:
+	// Handle user input (as a step towards finishing a basic shell) (much harder than expected)
 	// Clear screen from QEMU output and bootloader output
 	terminal_initialize();
-	terminal_writestring("Hello, world!");
-	terminal_putchar(10);
-	terminal_writestring("Oh, no!");
+	terminal_writestring("Hello, world!\n");
+	terminal_writestring("Keyboard input will be a monster.");		
+
 	for(;;) {__asm__ __volatile__("hlt");}
 }
 

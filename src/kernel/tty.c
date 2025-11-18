@@ -1,4 +1,3 @@
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
@@ -38,10 +37,40 @@ void terminal_putentryat(unsigned char c, uint8_t color, size_t x, size_t y) {
 	terminal_buffer[index] = vga_entry(c, color);
 }
 
-void terminal_putchar(char c) {
-	if (c == 10) {
-	terminal_row += 1; terminal_column = 0; return;
+bool is_esc_char(char c) {
+	static bool esc_table[256] = {
+		[EC_ALERT] = true,
+		[EC_BACKSPACE] = true,
+		[EC_HTAB] = true,
+		[EC_NEWLINE] = true,
+		[EC_VTAB] = true,
+		[EC_PAGE_BREAK] = true,
+		[EC_CARRIAGE_RETURN] = true,
+		[EC_ESC_CHAR] = true,
+		[EC_DQUOTE] = true,
+		[EC_QUOTE] = true,
+		[EC_QMARK] = true,
+		[EC_BACKSLASH] = true
 	};
+	return esc_table[c];
+}
+
+void terminal_putescchar(char c) {
+	switch (c) {
+		case EC_ALERT:
+			break;
+		case EC_HTAB:
+			terminal_column += 4;
+			break;
+		case EC_NEWLINE:
+			terminal_column = 0;
+			terminal_row += 1;
+			break;
+	}	
+}
+
+void terminal_putchar(char c) {
+	if (is_esc_char(c)) { terminal_putescchar(c); return; };	
 	unsigned char uc = c;
 	terminal_putentryat(uc, terminal_color, terminal_column, terminal_row);
 	if (++terminal_column == VGA_WIDTH) {
@@ -65,7 +94,7 @@ int _strlen(const char* input){
     return count;
 }
 
-void terminal_writestring(const char* data) {;
+void terminal_writestring(const char* data) {
 	terminal_write(data, _strlen(data));
 }
 
