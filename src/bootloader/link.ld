@@ -1,4 +1,4 @@
-OUTPUT_FORMAT("binary")
+OUTPUT_FORMAT("elf_i386")
 
 ENTRY(_start)
 

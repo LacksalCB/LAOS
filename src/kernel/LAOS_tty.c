@@ -2,9 +2,8 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "include/tty.h"
-
-#include "include/vga.h"
+#include "include/LAOS_tty.h"
+#include "include/LAOS_vga.h"
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
@@ -15,7 +14,7 @@ static size_t terminal_column;
 static uint8_t terminal_color;
 static uint16_t* terminal_buffer;
 
-void terminal_initialize(void) {
+void terminal_initialize() {
 	terminal_row = 0;
 	terminal_column = 0;
 	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
@@ -37,6 +36,7 @@ void terminal_putentryat(unsigned char c, uint8_t color, size_t x, size_t y) {
 	terminal_buffer[index] = vga_entry(c, color);
 }
 
+// Escape Character support for my benefit - won't be added in final version
 bool is_esc_char(char c) {
 	static bool esc_table[256] = {
 		[EC_ALERT] = true,

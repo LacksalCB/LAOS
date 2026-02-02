@@ -55,7 +55,7 @@ $(IMG): $(BOOTSECT) $(KERNEL)
 	dd if=/dev/zero of=$(IMG) bs=512 count=2880
 	dd if=$(BOOTSECT) of=$(IMG) conv=notrunc seek=0 count=1
 	dd if=$(KERNEL) of=$(IMG) conv=notrunc bs=512 seek=1 
-	objdump -D -b binary -mi386 -Maddr16,data16 $(IMG) >> $(LOG_DIR)/img.txt
+	objdump -D -b binary -mi386 $(IMG) >> $(LOG_DIR)/img.txt
 
 run: 
 	qemu-system-i386 -drive format=raw,file=boot.img
