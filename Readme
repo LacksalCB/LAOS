@@ -1,0 +1,7 @@
+# LAOS (Lacksal OS)
+
+Simple 32 bit x86 Kernel/Bootloader which most notably serves as an opportunity to explore the basics/inner workings of a modern OS kernel.
+
+## To build/run:
+`make` to build boot.img 
+`make run` to launch QEMU with boot.img as input

@@ -52,7 +52,7 @@ bool is_esc_char(char c) {
 		[EC_QMARK] = true,
 		[EC_BACKSLASH] = true
 	};
-	return esc_table[c];
+	return *(esc_table+(c*sizeof(char)));
 }
 
 void terminal_putescchar(char c) {

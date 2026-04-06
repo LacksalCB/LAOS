@@ -4,7 +4,6 @@ extern kernel_main
 
 section .text.start
 _start:
-    ; stack set by bootloader is OK, but let's own it
     mov esp, stack_top
     call kernel_main
 
